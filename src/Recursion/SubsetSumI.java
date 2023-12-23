@@ -26,10 +26,10 @@ public class SubsetSumI {
 
 	public  static void subsetSum(int[] arr, int index, ArrayList<Integer> al, ArrayList<Integer> ans) {
 
-		if( index > arr.length) {
+		if( index >= arr.length) {
 			int sum=0;
 			for( Integer i : al)
-				sum=sum+al.get(i);
+				sum=sum+i;
 			ans.add(sum);
 			return;
 		}

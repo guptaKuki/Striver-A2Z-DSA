@@ -21,18 +21,13 @@ public class CombinationSumII {
 		int target= sc.nextInt();
 		 ArrayList<Integer> al = new ArrayList<>();
 		 
-//		 HashSet<List<Integer>> res= new HashSet<>();
-//		combination(arr, 0,target,al,res);
-//		System.out.println(res);
+		 HashSet<List<Integer>> res= new HashSet<>();
+		combination(arr, 0,target,al,res);
+		System.out.println(res);
 		
 		List<List<Integer>> ans = new ArrayList<>();
-	    alternativeCombination(arr, n, target, al, ans);
-	    for (int i = 0; i < ans.size(); i++) { 
-            for (int j = 0; j < ans.get(i).size(); j++) { 
-                System.out.print(ans.get(i).get(j) + " "); 
-            } 
-            System.out.println(); 
-        } 
+	    alternativeCombination(arr, 0, target, al, ans);
+
 		System.out.println(ans);
 		  sc.close();
 	}
@@ -41,7 +36,7 @@ public class CombinationSumII {
 		
 		if( index >= arr.length) {
 			if( target == 0) {
-				res.add(al);
+				res.add(new ArrayList<Integer>(al));
 				return;
 			}else
 				return;
@@ -60,20 +55,22 @@ public class CombinationSumII {
 	
 	public static void alternativeCombination(int arr[], int index, int target, ArrayList<Integer> ds , List<List<Integer>> ans) {
 		if( target == 0) {
-			ans.add(new ArrayList<>(ds));
+			ans.add(new ArrayList<Integer>(ds));
 			return;
 		}
 		
 		for( int i=index;i<arr.length;i++) {
 			
-			if(i > index && arr[i]==arr[i-1])
-				continue;
-			
 			if(target < arr[i])
 				break;
 			
+			if(i > index && arr[i]==arr[i-1])
+				continue;
+			
 			ds.add(arr[i]);
-			alternativeCombination(arr, index+1, target-arr[i], ds, ans);
+			//System.out.println(ds);
+			alternativeCombination(arr, i+1, target-arr[i], ds, ans);
+			//System.out.println(ds);
 			ds.remove(ds.size()-1);
 		}
 	}
